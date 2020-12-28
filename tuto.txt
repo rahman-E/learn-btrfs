@@ -56,7 +56,7 @@ GlobalReserve, single: total=16.00MiB, used=0.00B
 --- ERROR: error removing the device '/dev/sdi' - unable to go below two devices on raid1
 --- to do so, here are the steps to go:
 ---- 1. first you have to convert your existing Btrfs volume to "single":
-sudo btrfs balance start -dconvert=single -mconvert=single -dconvert=single /mnt/MyPersonalData/
+sudo btrfs balance start -f -dconvert=single -mconvert=single -dconvert=single /mnt/MyPersonalData/
 
 ---- 2. then remove a disk from your RAID1 by running the command line:  
 sudo btrfs device delete /dev/sdi /mnt/MyPersonalData/ -- /mnt/MyPersonalData = is the name of the mounted volume 
@@ -88,7 +88,7 @@ sudo btrfs device add /dev/sdi /mnt/MyPersonalData/
 
 
 ---- 8. convert back your btrfs volume to raid1 mode
-sudo btrfs balance start -dconvert=raid1 -mconvert=raid1 -dconvert=raid1 /mnt/MyPersonalData/
+sudo btrfs balance start -f -dconvert=raid1 -mconvert=raid1 -dconvert=raid1 /mnt/MyPersonalData/
 
 ---- 9. check again if your btrfs volume is now of 2 disks 
 sudo btrfs fi show MyBTRFS
